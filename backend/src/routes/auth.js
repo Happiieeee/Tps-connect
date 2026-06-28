@@ -36,24 +36,58 @@ router.get('/me', verifyToken, async (req, res) => {
       );
     }
 
-    // Fallback: If not found by UID, check if email matches a pre-registered user
-    if (result.rows.length === 0 && req.firebaseEmail) {
-      console.log('Checking pre-registered email lookup for:', req.firebaseEmail);
-      const emailMatch = await pool.query(
-        `SELECT u.user_id, u.name, u.role, u.branch_id, b.name as branch_name
-         FROM users u
-         LEFT JOIN branches b ON u.branch_id = b.branch_id
-         WHERE u.email = $1 AND u.is_active = true`,
-        [req.firebaseEmail.toLowerCase()]
-      );
+    // Fallback: Query Firebase Auth metadata to find matching email or phone
+    if (result.rows.length === 0) {
+      console.log('User not found by UID. Querying Firebase Auth to match email/phone...');
+      try {
+        const firebaseUser = await admin.auth().getUser(req.firebaseUid);
+        const phone = firebaseUser.phoneNumber;
+        const email = firebaseUser.email;
+        console.log('Firebase User metadata:', { phone, email });
 
-      if (emailMatch.rows.length > 0) {
-        console.log('Found email match. Linking firebase_uid...');
-        await pool.query(
-          `UPDATE users SET firebase_uid = $1 WHERE user_id = $2`,
-          [req.firebaseUid, emailMatch.rows[0].user_id]
-        );
-        result = emailMatch;
+        if (phone) {
+          const normalized = phone.replace(/[\s\-+]/g, '');
+          const right10 = normalized.slice(-10);
+          
+          const phoneMatch = await pool.query(
+            `SELECT u.user_id, u.name, u.role, u.branch_id, b.name as branch_name
+             FROM users u
+             LEFT JOIN branches b ON u.branch_id = b.branch_id
+             WHERE RIGHT(REGEXP_REPLACE(u.phone, '[^0-9]', '', 'g'), 10) = $1
+               AND u.is_active = true`,
+            [right10]
+          );
+
+          if (phoneMatch.rows.length > 0) {
+            console.log('Found phone number match. Linking firebase_uid...');
+            await pool.query(
+              `UPDATE users SET firebase_uid = $1 WHERE user_id = $2`,
+              [req.firebaseUid, phoneMatch.rows[0].user_id]
+            );
+            result = phoneMatch;
+          }
+        }
+
+        if (result.rows.length === 0 && email) {
+          const emailMatch = await pool.query(
+            `SELECT u.user_id, u.name, u.role, u.branch_id, b.name as branch_name
+             FROM users u
+             LEFT JOIN branches b ON u.branch_id = b.branch_id
+             WHERE u.email = $1 AND u.is_active = true`,
+            [email.toLowerCase()]
+          );
+
+          if (emailMatch.rows.length > 0) {
+            console.log('Found email match. Linking firebase_uid...');
+            await pool.query(
+              `UPDATE users SET firebase_uid = $1 WHERE user_id = $2`,
+              [req.firebaseUid, emailMatch.rows[0].user_id]
+            );
+            result = emailMatch;
+          }
+        }
+      } catch (fbErr) {
+        console.warn('Firebase metadata lookup failed:', fbErr.message);
       }
     }
 
