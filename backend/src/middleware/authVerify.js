@@ -20,6 +20,8 @@ const verifyToken = async (req, res, next) => {
   try {
     const decoded = await admin.auth().verifyIdToken(token);
     req.firebaseUid = decoded.uid;
+    req.firebaseEmail = decoded.email;
+    req.firebasePhone = decoded.phone_number;
     next();
   } catch (err) {
     return res.status(401).json({ error: 'Invalid or expired token' });

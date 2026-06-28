@@ -8,13 +8,34 @@ const admin = require('firebase-admin');
 // GET /auth/me — called right after login, returns role and branchId
 router.get('/me', verifyToken, async (req, res) => {
   try {
-    const result = await pool.query(
+    let result = await pool.query(
       `SELECT u.user_id, u.name, u.role, u.branch_id, b.name as branch_name 
        FROM users u
        LEFT JOIN branches b ON u.branch_id = b.branch_id
        WHERE u.firebase_uid = $1`,
       [req.firebaseUid]
     );
+
+    // Auto-create super admin for Prathap's email if not found in DB
+    if (result.rows.length === 0 && req.firebaseEmail && req.firebaseEmail.toLowerCase() === 'prathap.v5214@gmail.com') {
+      console.log('Auto-registering Prathap.v5214@gmail.com as superadmin...');
+      await pool.query(
+        `INSERT INTO users (name, email, role, firebase_uid, is_active)
+         VALUES ($1, $2, 'superadmin', $3, true)
+         ON CONFLICT (email) DO UPDATE SET firebase_uid = $3, role = 'superadmin', is_active = true`,
+        ['Prathap', 'prathap.v5214@gmail.com', req.firebaseUid]
+      );
+
+      // Re-query
+      result = await pool.query(
+        `SELECT u.user_id, u.name, u.role, u.branch_id, b.name as branch_name 
+         FROM users u
+         LEFT JOIN branches b ON u.branch_id = b.branch_id
+         WHERE u.firebase_uid = $1`,
+        [req.firebaseUid]
+      );
+    }
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }

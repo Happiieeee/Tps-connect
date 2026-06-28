@@ -118,3 +118,7 @@ CREATE TABLE notifications (
   sent_by UUID REFERENCES users(user_id),
   sent_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Seed Initial Super Admin
+-- INSERT INTO users (name, email, role, is_active) VALUES ('Prathap', 'prathap.v5214@gmail.com', 'superadmin', true);
+

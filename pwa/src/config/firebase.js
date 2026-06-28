@@ -3,12 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getMessaging, isSupported } from 'firebase/messaging';
 
 const firebaseConfig = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: '',
+  apiKey: 'AIzaSyCNzh2c5b72SM3jUqdFGDbLURERC-uOzgA',
+  authDomain: 'tps-connect-bc72b.firebaseapp.com',
+  projectId: 'tps-connect-bc72b',
+  storageBucket: 'tps-connect-bc72b.firebasestorage.app',
+  messagingSenderId: '57492511873',
+  appId: '1:57492511873:web:19d83a369b3ac1ef062280',
+  measurementId: 'G-ND4SVME5EE',
 };
 
 const app = initializeApp(firebaseConfig);
