@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "project_number": "384559680246",
+    "project_id": "tps-aut",
+    "storage_bucket": "tps-aut.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384559680246:android:a156265856b91cc05bfad7",
+        "android_client_info": {
+          "package_name": "com.tps.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384559680246-higfhtvldh0121h9pofgnvm8cbbe5atq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tps.app",
+            "certificate_hash": "de4415e0dac7c74ae8232308cd6796193465027d"
+          }
+        },
+        {
+          "client_id": "384559680246-mq1058ogem6pi7n4vhol0aadriqpsujj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tps.app",
+            "certificate_hash": "d83b26c11c0cbe916a32356a73c27a9ade0fcb71"
+          }
+        },
+        {
+          "client_id": "384559680246-gm04uf7n1li9kjnp7cd1advcnvtk8db8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp4577qxMgcEU8kO2pqkYoB9RqValqM2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384559680246-gm04uf7n1li9kjnp7cd1advcnvtk8db8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384559680246:android:c7201b833bdd09d55bfad7",
+        "android_client_info": {
+          "package_name": "com.tps.connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384559680246-1bp1tccl709l52pk9ufdqijfr0ca7qcm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tps.connect",
+            "certificate_hash": "de4415e0dac7c74ae8232308cd6796193465027d"
+          }
+        },
+        {
+          "client_id": "384559680246-2414ve7ajpg84fintb1gq14hvclvbvat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tps.connect",
+            "certificate_hash": "d83b26c11c0cbe916a32356a73c27a9ade0fcb71"
+          }
+        },
+        {
+          "client_id": "384559680246-gm04uf7n1li9kjnp7cd1advcnvtk8db8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp4577qxMgcEU8kO2pqkYoB9RqValqM2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384559680246-gm04uf7n1li9kjnp7cd1advcnvtk8db8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
