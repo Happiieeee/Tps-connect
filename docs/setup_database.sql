@@ -4,7 +4,8 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 -- Branches
 CREATE TABLE branches (
   branch_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(100),
+  name VARCHAR(100) UNIQUE,
+  code VARCHAR(10) UNIQUE,
   location TEXT,
   admin_id UUID,
   created_at TIMESTAMPTZ DEFAULT NOW(),
