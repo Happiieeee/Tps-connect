@@ -36,6 +36,27 @@ router.get('/me', verifyToken, async (req, res) => {
       );
     }
 
+    // Fallback: If not found by UID, check if email matches a pre-registered user
+    if (result.rows.length === 0 && req.firebaseEmail) {
+      console.log('Checking pre-registered email lookup for:', req.firebaseEmail);
+      const emailMatch = await pool.query(
+        `SELECT u.user_id, u.name, u.role, u.branch_id, b.name as branch_name
+         FROM users u
+         LEFT JOIN branches b ON u.branch_id = b.branch_id
+         WHERE u.email = $1 AND u.is_active = true`,
+        [req.firebaseEmail.toLowerCase()]
+      );
+
+      if (emailMatch.rows.length > 0) {
+        console.log('Found email match. Linking firebase_uid...');
+        await pool.query(
+          `UPDATE users SET firebase_uid = $1 WHERE user_id = $2`,
+          [req.firebaseUid, emailMatch.rows[0].user_id]
+        );
+        result = emailMatch;
+      }
+    }
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
