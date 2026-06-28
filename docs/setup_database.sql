@@ -83,18 +83,19 @@ CREATE TABLE posts (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Leaves
-CREATE TABLE leaves (
+-- Leave Requests
+CREATE TABLE leave_requests (
   leave_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   student_id UUID REFERENCES students(student_id),
-  requested_by UUID REFERENCES users(user_id),
+  parent_id UUID REFERENCES users(user_id),
+  branch_id UUID REFERENCES branches(branch_id),
   from_date DATE,
   to_date DATE,
   reason TEXT,
   status VARCHAR(10) CHECK (status IN ('pending','approved','rejected')),
   reviewed_by UUID REFERENCES users(user_id),
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
+  reviewed_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- Teacher Logs
