@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "384559680246",
-    "project_id": "tps-aut",
-    "storage_bucket": "tps-aut.firebasestorage.app"
+    "project_number": "574925311873",
+    "project_id": "tps-connect-bc72b",
+    "storage_bucket": "tps-connect-bc72b.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:384559680246:android:a156265856b91cc05bfad7",
+        "mobilesdk_app_id": "1:574925311873:android:f1784c25f7d95af9062280",
         "android_client_info": {
           "package_name": "com.tps.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "384559680246-higfhtvldh0121h9pofgnvm8cbbe5atq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.tps.app",
-            "certificate_hash": "de4415e0dac7c74ae8232308cd6796193465027d"
-          }
-        },
-        {
-          "client_id": "384559680246-gm04uf7n1li9kjnp7cd1advcnvtk8db8.apps.googleusercontent.com",
+          "client_id": "574925311873-67a2jrgt5u7jvra8lmdgf053p0s3bi02.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBp4577qxMgcEU8kO2pqkYoB9RqValqM2Q"
+          "current_key": "AIzaSyCa7Vo1QQLb4Os1f2x-ALH_thHS1eTTvCw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "384559680246-gm04uf7n1li9kjnp7cd1advcnvtk8db8.apps.googleusercontent.com",
+              "client_id": "574925311873-67a2jrgt5u7jvra8lmdgf053p0s3bi02.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

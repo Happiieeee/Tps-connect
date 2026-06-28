@@ -18,19 +18,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: '',
-    appId: '',
-    messagingSenderId: '',
-    projectId: '',
-    authDomain: '',
-    storageBucket: '',
+    apiKey: 'AIzaSyCNzh2c5b72SM3jUqdFGDbLURERC-uOzgA',
+    appId: '1:57492511873:web:19d83a369b3ac1ef062280',
+    messagingSenderId: '57492511873',
+    projectId: 'tps-connect-bc72b',
+    authDomain: 'tps-connect-bc72b.firebaseapp.com',
+    storageBucket: 'tps-connect-bc72b.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: '',
-    appId: '',
-    messagingSenderId: '',
-    projectId: '',
-    storageBucket: '',
+    apiKey: 'AIzaSyCa7Vo1QQLb4Os1f2x-ALH_thHS1eTTvCw',
+    appId: '1:574925311873:android:f1784c25f7d95af9062280',
+    messagingSenderId: '574925311873',
+    projectId: 'tps-connect-bc72b',
+    storageBucket: 'tps-connect-bc72b.firebasestorage.app',
   );
 }
