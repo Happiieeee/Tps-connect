@@ -64,6 +64,25 @@ export default function TeacherDashboard() {
     loadInitialData();
   }, [profile]);
 
+  // Sync activeTab state with browser history for back button optimization
+  useEffect(() => {
+    if (activeTab !== 'home' && (!window.history.state || window.history.state.activeTab !== activeTab)) {
+      window.history.pushState({ activeTab }, '');
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (event.state && event.state.activeTab) {
+        setActiveTab(event.state.activeTab);
+      } else {
+        setActiveTab('home');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   // Fetch students when class changes
   useEffect(() => {
     if (!selectedClass) return;

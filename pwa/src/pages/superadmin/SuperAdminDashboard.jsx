@@ -90,6 +90,25 @@ export default function SuperAdminDashboard() {
     loadStats();
   }, []);
 
+  // Sync view state with browser history for back button optimization
+  useEffect(() => {
+    if (view !== 'home' && (!window.history.state || window.history.state.view !== view)) {
+      window.history.pushState({ view }, '');
+    }
+  }, [view]);
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (event.state && event.state.view) {
+        setView(event.state.view);
+      } else {
+        setView('home');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   // View state changes loader
   useEffect(() => {
     if (view === 'home') {

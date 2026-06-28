@@ -44,60 +44,69 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
       );
     }
 
-    return Scaffold(
-      backgroundColor: TPSTheme.background,
-      appBar: AppBar(
-        backgroundColor: TPSTheme.primary,
-        automaticallyImplyLeading: false,
-        title: Row(children: [
-          const Icon(Icons.eco_rounded, color: Colors.white, size: 20),
-          const SizedBox(width: 8),
-          const Text('TPS', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-        ]),
-        actions: [
-          Stack(children: [
-            IconButton(icon: const Icon(Icons.notifications_outlined,
-                color: Colors.white), onPressed: () {}),
-            Positioned(top: 10, right: 10, child: Container(
-              width: 8, height: 8,
-              decoration: const BoxDecoration(
-                  color: TPSTheme.warning, shape: BoxShape.circle),
-            )),
+    return PopScope(
+      canPop: _tab == 0,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (_tab != 0) {
+          setState(() => _tab = 0);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: TPSTheme.background,
+        appBar: AppBar(
+          backgroundColor: TPSTheme.primary,
+          automaticallyImplyLeading: false,
+          title: Row(children: [
+            const Icon(Icons.eco_rounded, color: Colors.white, size: 20),
+            const SizedBox(width: 8),
+            const Text('TPS', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
           ]),
-          Container(
-            margin: const EdgeInsets.only(right: 12),
-            width: 34, height: 34,
-            decoration: const BoxDecoration(
-                color: TPSTheme.accent, shape: BoxShape.circle),
-            child: Center(child: Text(
-                children.isNotEmpty ? children[0]['name'][0].toUpperCase() : 'P',
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700,
-                    color: TPSTheme.textMid))),
-          ),
-        ],
-      ),
-      body: _tab == 0 ? _homeTab() : _tab == 1
-          ? const PostFeedScreen()
-          : _tab == 2 ? _attendanceTab()
-          : _tab == 3 ? _leaveTab()
-          : _profileTab(),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _tab,
-        onDestinationSelected: (i) => setState(() => _tab = i),
-        backgroundColor: TPSTheme.surface,
-        indicatorColor: TPSTheme.accentLight,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home_outlined),
-              selectedIcon: Icon(Icons.home, color: TPSTheme.primary), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.article_outlined),
-              selectedIcon: Icon(Icons.article, color: TPSTheme.primary), label: 'Posts'),
-          NavigationDestination(icon: Icon(Icons.calendar_today_outlined),
-              selectedIcon: Icon(Icons.calendar_today, color: TPSTheme.primary), label: 'Attendance'),
-          NavigationDestination(icon: Icon(Icons.mail_outline),
-              selectedIcon: Icon(Icons.mail, color: TPSTheme.primary), label: 'Leaves'),
-          NavigationDestination(icon: Icon(Icons.person_outline),
-              selectedIcon: Icon(Icons.person, color: TPSTheme.primary), label: 'Profile'),
-        ],
+          actions: [
+            Stack(children: [
+              IconButton(icon: const Icon(Icons.notifications_outlined,
+                  color: Colors.white), onPressed: () {}),
+              Positioned(top: 10, right: 10, child: Container(
+                width: 8, height: 8,
+                decoration: const BoxDecoration(
+                    color: TPSTheme.warning, shape: BoxShape.circle),
+              )),
+            ]),
+            Container(
+              margin: const EdgeInsets.only(right: 12),
+              width: 34, height: 34,
+              decoration: const BoxDecoration(
+                  color: TPSTheme.accent, shape: BoxShape.circle),
+              child: Center(child: Text(
+                  children.isNotEmpty ? children[0]['name'][0].toUpperCase() : 'P',
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700,
+                      color: TPSTheme.textMid))),
+            ),
+          ],
+        ),
+        body: _tab == 0 ? _homeTab() : _tab == 1
+            ? const PostFeedScreen()
+            : _tab == 2 ? _attendanceTab()
+            : _tab == 3 ? _leaveTab()
+            : _profileTab(),
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: _tab,
+          onDestinationSelected: (i) => setState(() => _tab = i),
+          backgroundColor: TPSTheme.surface,
+          indicatorColor: TPSTheme.accentLight,
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.home_outlined),
+                selectedIcon: Icon(Icons.home, color: TPSTheme.primary), label: 'Home'),
+            NavigationDestination(icon: Icon(Icons.article_outlined),
+                selectedIcon: Icon(Icons.article, color: TPSTheme.primary), label: 'Posts'),
+            NavigationDestination(icon: Icon(Icons.calendar_today_outlined),
+                selectedIcon: Icon(Icons.calendar_today, color: TPSTheme.primary), label: 'Attendance'),
+            NavigationDestination(icon: Icon(Icons.mail_outline),
+                selectedIcon: Icon(Icons.mail, color: TPSTheme.primary), label: 'Leaves'),
+            NavigationDestination(icon: Icon(Icons.person_outline),
+                selectedIcon: Icon(Icons.person, color: TPSTheme.primary), label: 'Profile'),
+          ],
+        ),
       ),
     );
   }
