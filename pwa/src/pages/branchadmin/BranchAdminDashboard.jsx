@@ -541,6 +541,18 @@ export default function BranchAdminDashboard() {
       {/* Main Page Area */}
       <main className="page-content" style={{ paddingBottom: '30px' }}>
         {/* ── HOME TAB ── */}
+        {view === 'home' && !stats && (
+          <div className="card text-center fade-in" style={{ padding: '40px 24px', margin: '20px', background: 'white', borderRadius: '12px', border: '1px solid var(--accent-border)' }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>⚠️</div>
+            <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--text-dark)' }}>Failed to Load Dashboard</h3>
+            <p style={{ color: 'var(--text-light)', fontSize: '14px', marginBottom: '16px' }}>
+              We couldn't retrieve the stats for this branch. Please check your network connection or contact support.
+            </p>
+            <button className="btn btn-primary" onClick={loadStats}>
+              Retry Loading
+            </button>
+          </div>
+        )}
         {view === 'home' && stats && (
           <div className="flex flex-col gap-16 fade-in">
             {/* Quick Stats Grid */}

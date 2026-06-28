@@ -268,8 +268,18 @@ export default function TeacherDashboard() {
 
       {/* Content */}
       <main className="page-content">
-        {/* ── HOME TAB ── */}
-        {activeTab === 'home' && (
+        {!selectedClass && activeTab !== 'profile' ? (
+          <div className="card text-center fade-in" style={{ padding: '40px 24px', margin: '20px', background: 'white', borderRadius: '12px', border: '1px solid var(--accent-border)' }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>🏫</div>
+            <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--text-dark)' }}>No Class Assigned</h3>
+            <p style={{ color: 'var(--text-light)', fontSize: '14px', lineHeight: '1.5' }}>
+              You have not been assigned to any grade section yet. Please contact your school administrator to assign you to a class.
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* ── HOME TAB ── */}
+            {activeTab === 'home' && (
           <div className="flex flex-col gap-16 fade-in">
             {/* Teacher Details */}
             <div className="card card-glass">
@@ -490,6 +500,8 @@ export default function TeacherDashboard() {
               </button>
             </form>
           </div>
+        )}
+          </>
         )}
 
         {/* ── PROFILE TAB ── */}

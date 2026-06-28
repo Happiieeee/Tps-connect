@@ -326,8 +326,18 @@ export default function ParentDashboard() {
 
       {/* Main Page Content */}
       <main className="page-content">
-        {/* ── HOME TAB ── */}
-        {activeTab === 'home' && selectedChild && (
+        {!selectedChild && activeTab !== 'profile' ? (
+          <div className="card text-center fade-in" style={{ padding: '40px 24px', margin: '20px', background: 'white', borderRadius: '12px', border: '1px solid var(--accent-border)' }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>👶</div>
+            <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--text-dark)' }}>No Children Linked</h3>
+            <p style={{ color: 'var(--text-light)', fontSize: '14px', lineHeight: '1.5' }}>
+              There are currently no child profiles linked to this parent account. Please contact your school administrator to associate your child with this email.
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* ── HOME TAB ── */}
+            {activeTab === 'home' && selectedChild && (
           <div className="flex flex-col gap-16 fade-in">
             {/* Child Card */}
             <div className="card card-glass flex items-center gap-16">
@@ -751,6 +761,8 @@ export default function ParentDashboard() {
               </div>
             )}
           </div>
+        )}
+          </>
         )}
 
         {/* ── PROFILE TAB ── */}
